@@ -27,7 +27,7 @@ This app was designed with accessibility and performance in mind, particularly f
 * **Scalable Performance:** Designed to handle and navigate libraries with over 100,000 tracks smoothly.
 * **Algorithmic Curation:** Built-in features for music discovery and organization.
 
-## 🖼️ Screenshots
+## Screenshots
 
 *Screenshots taken on iPhone 15 Pro Max*
 
@@ -36,36 +36,46 @@ This app was designed with accessibility and performance in mind, particularly f
 ### Home
 
 <p align="center">
-  <img src="screenshots/home.png" alt="EchoFlow Home" width="275" height="600">
+  <img src="screenshots/home.png" alt="EchoFlow Home" width="275" height="600">
 </p>
 
 ---
 
-### Library Views (Artists, Albums, Offline)
+### Library
+
+**Artists**
 
 <p align="center">
-  <img src="screenshots/library_artists.png" alt="Library Artists" width="275" height="600" />
-  <img src="screenshots/library_albums.PNG" alt="Library Albums" width="275" height="600" />
-  <img src="screenshots/library_downloaded_tracks.PNG" alt="Library Tracks" width="275" height="600" />
+  <img src="screenshots/library_artists.png" alt="Library Artists" width="275" height="600" />
+  <img src="screenshots/library_albums.PNG" alt="Library Albums" width="275" height="600" />
+  <img src="screenshots/library_downloaded_tracks.PNG" alt="Library Tracks" width="275" height="600" />
 </p>
 
 **Artist View**
 
 <p align="center">
-  <img src="screenshots/artist.png" alt="Artist" width="275" height="600">
+  <img src="screenshots/artist.png" alt="Artist" width="275" height="600">
 </p>
 
----
-
-### Player & Car Integration
+**Similar Artists**
 
 <p align="center">
-  <img src="screenshots/player.png" alt="Player" width="275" height="600">
-  <img src="screenshots/player_queue.png" alt="Queue" width="275" height="600">
+  <img src="screenshots/artist_similarto.png" alt="Similar Artists" width="275" height="600">
 </p>
 
+**Album Views**
+
 <p align="center">
-  <img src="screenshots/carplay.gif" alt="CarPlay" width="400" height="250">
+  <img src="screenshots/album.png" alt="Album" width="275" height="600">
+  <img src="screenshots/album_multiple_artists.png" alt="MultiArtist Album" width="275" height="600">
+  <img src="screenshots/offline_album.png" alt="Offline Album" width="275" height="600">
+</p>
+
+**Track Options & Add to Playlist**
+
+<p align="center">
+  <img src="screenshots/track_options.png" alt="Track Options" width="275" height="600">
+  <img src="screenshots/playlist.png" alt="Playlist" width="275" height="600">
 </p>
 
 ---
