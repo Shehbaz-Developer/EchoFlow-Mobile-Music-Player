@@ -1,0 +1,14 @@
+node_modules/
+
+# Ignore YAML files
+*.yml
+*.yaml
+
+# Ignore Markdown files
+*.md
+
+# Ignore iOS Pods directory
+ios/**/*
+
+# Ignore package.json files
+package.json
