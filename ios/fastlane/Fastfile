@@ -1,0 +1,124 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+
+  lane :build do 
+    setup_ci
+    match(
+      type: "appstore",
+      app_identifier: "com.cosmonautical.jellify",
+    )
+    match(
+      type: "development",
+      app_identifier: "com.cosmonautical.jellify",
+    )
+    appIdentifier = "com.cosmonautical.jellify"
+    
+    target = "Jellify"
+   
+    build_app(
+      scheme: "Jellify - Release",
+      workspace: "Jellify.xcworkspace",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "com.cosmonautical.jellify" => "match AppStore com.cosmonautical.jellify"
+        }
+      }
+    )
+  end 
+
+  lane :beta do
+    setup_ci
+    match(
+      type: "appstore",
+      app_identifier: "com.cosmonautical.jellify",
+    )
+
+    build_app(
+      scheme: "Jellify - Release",
+      workspace: "Jellify.xcworkspace"
+      
+    )
+    changelog_from_git_commits(
+      date_format: "short",
+      commits_count: 1,
+      match_lightweight_tag: false
+    )
+    # http://docs.fastlane.tools/actions/upload_to_testflight/#upload_to_testflight
+    upload_to_testflight(
+      api_key_path: "fastlane/appstore_connect_api_key.json",
+      beta_app_feedback_email: "hello@jellify.app",
+      beta_app_description: "A music app for Jellyfin",
+      expire_previous_builds: false,
+      distribute_external: true,
+      groups: [
+        "Selfhosters"
+      ]
+    )
+  end
+   
+  lane :notifyOnDiscordForRelease do
+    app_version = ENV["APP_VERSION"] || "N/A"
+    changelog = sh("git log -n 3 --pretty=format:'• %s (%h) - %an'").split("\n").join("\n")
+    discord_url = ENV["DISCORD_WEBHOOK_URL"] || "N/A"
+    release_url = ENV["release_url"]
+    testflight_url = "https://testflight.apple.com/join/etVSc7ZQ"
+    unix_timestamp = Time.now.to_i
+    discord_notifier(
+        webhook_url: ENV["DISCORD_WEBHOOK_URL"], 
+        title: "🎉 App v#{app_version} Released!",
+        description: "**A new version of Jellify has just been released**",
+        
+        fields: [
+          {
+            name: "📱 Version",
+            value: app_version
+          },
+          {
+            name: "📦 Download URL",
+            value:  "TestFlight URL: #{testflight_url}\nRelease URL: #{release_url}"
+          },
+          {
+            name: "🕒 Released On",
+            value: "<t:#{unix_timestamp}:f>"
+          },
+          {
+            name: "📝 Release Notes",
+            value: "`#{ENV["RELEASE_NOTES"]}`"
+          }
+        ],
+        success:true
+      )
+    
+  end
+
+  lane :notifyOnDiscord do |options|
+    title = options[:title]
+    description = options[:description]
+  
+    discord_notifier(
+        webhook_url: ENV["DISCORD_WEBHOOK_URL"], 
+        title: title,
+        description: description,
+        success:true
+      )
+    
+  end
+end

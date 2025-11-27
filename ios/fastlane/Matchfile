@@ -1,0 +1,15 @@
+git_url("https://github.com/Jellify-Music/Signing.git")
+
+storage_mode("git")
+
+type("development") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier("com.cosmonautical.jellify") # The bundle identifier of your app
+username("violet@cosmonautical.cloud") # Your Apple Developer Portal username
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
+
+# The docs are available on https://docs.fastlane.tools/actions/match
+
+git_basic_authorization(Base64.strict_encode64(ENV["MATCH_REPO_PAT"]))
